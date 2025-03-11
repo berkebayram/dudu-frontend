@@ -1,4 +1,6 @@
-import { Geist, Geist_Mono, Pixelify_Sans } from "next/font/google";
+'use client';
+
+import {  Pixelify_Sans } from "next/font/google";
 import bg from "../public/bg.png";
 import character from "../public/character.png";
 import { useRef, useState } from "react";
