@@ -9,7 +9,7 @@ const pixelMono = Pixelify_Sans({
 });
 
 export default function Home() {
-    const backendUrl = "http://localhost:3002/";
+    const backendUrl = "http://154.53.160.194:3002";
 
     const [code, setCode] = useState("");
     const [siteState, setSiteState] = useState("upload");
