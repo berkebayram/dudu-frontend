@@ -1,6 +1,6 @@
 'use client';
 
-import {  Pixelify_Sans } from "next/font/google";
+import { Pixelify_Sans } from "next/font/google";
 import bg from "../public/bg.png";
 import character from "../public/character.png";
 import { useRef, useState } from "react";
@@ -97,12 +97,27 @@ export default function Home() {
 
 
 const ShowUploaded = ({ code, onNewUploadWanted }) => {
+    const unsecuredCopyToClipboard = (text) => { const textArea = document.createElement("textarea"); textArea.value = text; document.body.appendChild(textArea); textArea.focus(); textArea.select(); try { document.execCommand('copy') } catch (err) { console.error('Unable to copy to clipboard', err) } document.body.removeChild(textArea) };
+
+    /**
+     * Copies the text passed as param to the system clipboard
+     * Check if using HTTPS and navigator.clipboard is available
+     * Then uses standard clipboard API, otherwise uses fallback
+    */
+    const copyToClipboard = (content) => {
+        if (window.isSecureContext && navigator.clipboard) {
+            navigator.clipboard.writeText(content);
+        } else {
+            unsecuredCopyToClipboard(content);
+        }
+    };
+
     return (
         <div className="text-2xl">
             <div className="flex flex-row align-middle justify-center justify-items-center">
                 <p className={pixelMono.className}>{code}</p>
                 <button className="flex justify-center bg-orange-500 px-2  rounded text-white text-xl ml-4" onClick={() => {
-                    navigator.clipboard.writeText(code);
+                    copyToClipboard(code);
                 }}>
                     <p className={pixelMono.className}>KOPYALA</p>
                 </button>
